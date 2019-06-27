@@ -3,6 +3,7 @@ package nju.androidchat.client.component;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.text.SpannableString;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -35,6 +36,15 @@ public class ItemTextReceive extends LinearLayout {
         setText(text);
     }
 
+    public ItemTextReceive(Context context, SpannableString text, UUID messageId) {
+        super(context);
+        this.context = context;
+        inflate(context, R.layout.item_text_receive, this);
+        this.textView = findViewById(R.id.chat_item_content_text);
+        this.messageId = messageId;
+        setText(text);
+    }
+
     public void init(Context context) {
 
     }
@@ -44,6 +54,10 @@ public class ItemTextReceive extends LinearLayout {
     }
 
     public void setText(String text) {
+        textView.setText(text);
+    }
+
+    public void setText(SpannableString text){
         textView.setText(text);
     }
 }

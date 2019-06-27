@@ -3,6 +3,7 @@ package nju.androidchat.client.component;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.text.SpannableString;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -36,6 +37,18 @@ public class ItemTextSend extends LinearLayout implements View.OnLongClickListen
         setText(text);
     }
 
+    public ItemTextSend(Context context, SpannableString text, UUID messageId, OnRecallMessageRequested onRecallMessageRequested) {
+        super(context);
+        this.context = context;
+        inflate(context, R.layout.item_text_send, this);
+        this.textView = findViewById(R.id.chat_item_content_text);
+        this.messageId = messageId;
+        this.onRecallMessageRequested = onRecallMessageRequested;
+
+        this.setOnLongClickListener(this);
+        setText(text);
+    }
+
     public String getText() {
         return textView.getText().toString();
     }
@@ -44,6 +57,9 @@ public class ItemTextSend extends LinearLayout implements View.OnLongClickListen
         textView.setText(text);
     }
 
+    public void setText(SpannableString text){
+        textView.setText(text);
+    }
     @Override
     public boolean onLongClick(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
